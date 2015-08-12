@@ -1,0 +1,21 @@
+//Table File (c) 2004 4head studios
+//Modified by RUNEFORGE Game Studio
+
+Table Description:
+"id" INT -1 |"title" STRING  0 |"price" INT  0 |"script" STRING  0 |"maxresidencelevel" INT  0 |"maxworkshops" INT  0 |"minimperialfame" INT  0 |
+
+Data:
+1   "Unfreier"   0   ""   0   0   0   |
+2   "Gemeiner"   250   "privileges/ps_02_gemeiner.lua"   1   1   0   |
+3   "Freisasse"   500   "privileges/ps_03_freisasse.lua"   2   2   0   |
+4   "Beisasse"   2000   "privileges/ps_04_beisasse.lua"   2   4   0   |
+5   "Buerger"   6000   "privileges/ps_05_buerger.lua"   3   7   0   |
+6   "Freibuerger"   15000   "privileges/ps_06_freibuerger.lua"   3   10   0   |
+7   "Patrizier"   30000   "privileges/ps_07_patrizier.lua"   4   15   0   |
+8   "Edelmann"   80000   "privileges/ps_08_edelmann.lua"   4   30   1   |
+9   "Freiherr"   150000   "privileges/ps_09_freiherr.lua"   5   45   1   |
+10   "Baron"   300000   "privileges/ps_10_baron.lua"   5   55   2   |
+11   "Graf"   600000   "privileges/ps_11_graf.lua"   5   100   2   |
+12   "Markgraf"   1000000   "privileges/ps_12_markgraf.lua"   5   200   3   |
+13   "Fuerst"   1500000   "privileges/ps_13_fuerst.lua"   5   500   4   |
+14   "Reichsfuerst"   2000000   "privileges/ps_14_reichsfuerst.lua"   5   999   5   |

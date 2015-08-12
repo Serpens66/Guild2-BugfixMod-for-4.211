@@ -1,0 +1,49 @@
+function CheckStart()
+  return true
+end
+
+function Start()
+
+	-- ---------------------------------------
+	-- Debug script for random camera movement
+	-- ---------------------------------------
+	local NextAction = 0
+	if DynastyIsPlayer("Actor") then
+		ScenarioCreatePosition(-9999+Rand(9999), -9999+Rand(9999), "CamPos")
+		while (true) do
+			Sleep(10+Rand(10))
+			HudClearSelection()
+			if NextAction==0 then
+				local NumObjects = Find("World", "__F((Object.Type==Sim)OR(Object.Type==Building)OR(Object.Type==Cart))", "SelectedObject", -1)
+				if NumObjects > 0 then
+					local RandObj = Rand(NumObjects-1)
+					HudAddToSelection("SelectedObject"..RandObj)
+					CameraFollow("SelectedObject"..RandObj)
+				end
+			elseif NextAction==1 then
+				local NumBuildings = Find("World", "__F((Object.Type==Building))", "InsideBuilding", -1)
+				if NumBuildings > 0 then
+					GetPosition("InsideBuilding", "CamPos")
+					CameraIndoorSetBuilding("InsideBuilding"..Rand(NumBuildings-1))
+				end
+			elseif NextAction==2 then
+				ScenarioCreatePosition(-9999+Rand(9999), -9999+Rand(9999), "CamPos")
+				ExitBuildingWithCamera()
+				CameraTerrainSetPos("CamPos")
+			end
+			
+			NextAction = NextAction + 1
+			if NextAction == 3 then
+				NextAction = 0
+			end
+			
+		end
+	end
+	-- ---------
+	-- Debug end
+	-- ---------
+	
+end
+
+function CleanUp()
+end

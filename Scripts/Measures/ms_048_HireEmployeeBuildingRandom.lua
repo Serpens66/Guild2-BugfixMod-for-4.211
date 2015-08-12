@@ -4,13 +4,13 @@ function Run()
 	local Button2 = "@B[N,@L_HPFZ_EINSTELLEN_+1]"
 	local Button3 = "@B[M,@L_HPFZ_EINSTELLEN_+2]"
 	
-	local Worker2Exists = FindWorker("","worker",4)
+	local Worker2Exists = FindWorker("","worker",3)
 	if Worker2Exists ~= "" then
 		Button2 = ""
 	end
 	
-	local Worker3Exists = FindWorker("","worker",8)
-	if Worker2Exists ~= "" then
+	local Worker3Exists = FindWorker("","worker",5)
+	if Worker3Exists ~= "" then
 		Button3 = ""
 	end		
 
@@ -32,15 +32,15 @@ function Run()
 	
 	local DesiredLevel = 1
 	if auswahl == "N" then
-		DesiredLevel = 4
+		DesiredLevel = 3
 	elseif auswahl == "M" then
-		DesiredLevel = 8
+		DesiredLevel = 5
 	end
 		
-  local arbeiter = FindWorker("", "RandWorker",DesiredLevel)
-  if arbeiter~="" then
-	  chr_OutputHireError("RandWorker", "", arbeiter)
-	  return
+    local arbeiter = FindWorker("", "RandWorker",DesiredLevel)
+    if arbeiter~="" then
+        chr_OutputHireError("RandWorker", "", arbeiter)
+        return
 	end
 	local Handsel = SimGetHandsel("RandWorker", "")
 	if BuildingHasUpgrade("",716) == true then
@@ -59,7 +59,9 @@ function Run()
 	SetData("Lvl",Level)
 	local Salary	= SimGetWage("RandWorker")
 	SetData("Saly",Salary)
-	
+    local XP        = GetDatabaseValue("CharLevels", Level-1, "xp")  -- XP which was needed for the current level
+    SetData("XPP",XP)
+    
 	-- PATCH TODO
 	if HasProperty("RandWorker", "courted") then
 		StopMeasure()
@@ -121,6 +123,7 @@ function DecideYou()
 	local handsels = GetData("Hands")
 	local levels = GetData("Lvl")
 	local salarys = GetData("Saly")
+    local xp = GetData("XPP")
 	
 	if BuildingGetOwner("","BOwner") then
 		if GetMoney("BOwner")<handsels then
@@ -148,9 +151,10 @@ function DecideYou()
 --		chr_OutputHireError("RandWorker", "", "NoWorker")
 --	end
 
-	Error = SimHire("RandWorker", "", true)
+	Error = SimHire("RandWorker", "",true)
 	chr_OutputHireError("RandWorker", "", Error)
-			
+
+    IncrementXPQuiet("RandWorker",xp)	      -- XP back to previous value
 	if Error == "" then
 		PlaySound("Effects/moneybag_to_hand+0.wav",1)
 		if BuildingHasUpgrade("",716) == true then
@@ -163,19 +167,18 @@ function DecideYou()
 		end
 		SetData("Entscheid",1)
 		if DynastyIsShadow("") == true or DynastyIsAI("") == true then
-		    if BuildingGetLevel("") == 1 then
-			  local lvlset = (Rand(3)+1)
+		    if BuildingGetLevel("") == 1 then  
+			  local lvlset = (Rand(2)+1)   -- 1 or 2
 				SetProperty("RandWorker","Level",lvlset)
 			elseif BuildingGetLevel("") == 2 then
-			  local lvlset = (Rand(4)+4)
+			  local lvlset = (Rand(2)+3) -- 3 or 4
 				SetProperty("RandWorker","Level",lvlset)
 			else
-			  local lvlset = (Rand(3)+8)
+			  local lvlset = (Rand(2)+5)  -- 5 or 6
 				SetProperty("RandWorker","Level",lvlset)
 			end
 		end
 	end
-	
 	if GetImpactValue("RandWorker","Sickness")>0 then
 		diseases_Sprain("RandWorker",false)
 		diseases_Cold("RandWorker",false)
@@ -192,7 +195,6 @@ function DecideYou()
 	MoveSetActivity("","")
 	SimGetWorkingPlace("RandWorker", "workbuilding")
 	chr_CalculateBuildingBonus("RandWorker","","hire")
-
 end
 
 function DecideFirst()

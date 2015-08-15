@@ -1,18 +1,19 @@
 function Run()
 	--how far the Destination can be to start this action
-	local MaxDistance = 500
+	local MaxDistance = 1000
 	--how far from the destination, the owner should stand while reading the letter from rome
 	local ActionDistance = 80
 
-	--StartGameTimer(8)
-	MeasureSetStopMode(STOP_NOMOVE)
+	StartGameTimer(24)
+	--MeasureSetStopMode(STOP_NOMOVE)
 	
 	f_ExitCurrentBuilding("Owner")
 	
 	if not AliasExists("Destination") then
-		CopyAlias("", "Destination")
+		GetSettlement("","City")
+		CityFindCrowdedPlace("City","Destination")
 	end
-	MeasureSetNotRestartable() 
+	--MeasureSetNotRestartable() 
 	f_MoveTo("","Destination")
 	
 	if not SimGetWorkingPlace("Owner","WorkBuilding") then
@@ -32,14 +33,10 @@ function Run()
 	MsgMeasure("","@L_GENERAL_MEASURES_211_ORDERCOLLECTEVIDENCE_ACTION_+0")
 
 	local	Total = 0
-	
-	SetData("IsProductionMeasure", 0)
-	SimSetProduceItemID("", -GetCurrentMeasureID(""), -1)
-	SetData("IsProductionMeasure", 1)
-	
-	while true do
 		
-		local NumOfObjects = Find("Owner","__F( (Object.GetObjectsByRadius(Sim)==3000) AND NOT(Object.BelongsToMe())AND(Object.CanBeInterrupted(OrderCollectEvidence))AND NOT(Object.GetState(cutscene))AND NOT(Object.HasImpact(HasBeenTalked))AND NOT(Object.GetProfession() == 25)AND NOT(Object.GetProfession() == 21)AND NOT(Object.GetProfession() == 22))","Sims",-1)
+	while not CheckGameTimerEnd() do
+		
+		local NumOfObjects = Find("Owner","__F( (Object.GetObjectsByRadius(Sim)==1000) AND NOT(Object.BelongsToMe())AND(Object.CanBeInterrupted(OrderCollectEvidence))AND NOT(Object.GetState(cutscene))AND NOT(Object.HasImpact(HasBeenTalked))AND NOT(Object.GetProfession() == 25)AND NOT(Object.GetProfession() == 21)AND NOT(Object.GetProfession() == 22))","Sims",-1)
 		if NumOfObjects>0 then
 			local DestAlias = "Sims"..Rand(NumOfObjects)
 			
@@ -84,6 +81,7 @@ function Run()
 								"@L_GENERAL_MEASURES_211_ORDERCOLLECTEVIDENCE_MSG_SUCCESS_HEAD_+0",
 								"@L_GENERAL_MEASURES_211_ORDERCOLLECTEVIDENCE_MSG_SUCCESS_BODY_+0",GetID(""))
 							Total = Total + Cnt
+							IncrementXP("",25)
 						end
 					end
 				else
@@ -110,7 +108,7 @@ function Run()
 		end
 	end
 	
-	MeasureRun("","Destination",2110)
+	MeasureRun("","Destination",2110,true)
 	
 	--f_MoveTo("","Workbuilding")
 end

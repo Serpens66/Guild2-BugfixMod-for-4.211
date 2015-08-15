@@ -92,15 +92,16 @@ function Run()
 			if not f_BeginUseLocator("","TreatmentPos",GL_STANCE_STAND,true) then
 				return
 			end
-			Sleep(1)
+			Sleep(0.5)
 			if not f_MoveTo("SickSim0","Owner",GL_MOVESPEED_WALK,128) then
 				return
 			end
 			AlignTo("SickSim0","")
 			AlignTo("","SickSim0")
-			Sleep(2)
+			Sleep(1)
 			StopAllAnimations("")
 			MoveStop("")
+			MeasureSetNotRestartable()
 			
 			
 			MsgSay("SickSim0","@L_MEDICUS_TREATMENT_PATIENT")
@@ -120,7 +121,7 @@ function Run()
 						Cured = true
 					else
 						MsgSay("","@L_MEDICUS_TREATMENT_DOC_NOMONEY")
-						AddItems("SickSim0","Bandage",1,INVENTORY_STD)
+						AddItems("Hospital","Bandage",1,INVENTORY_STD)
 					end
 				else
 					--not enough mats
@@ -144,7 +145,7 @@ function Run()
 						Cured = true
 					else
 						MsgSay("","@L_MEDICUS_TREATMENT_DOC_NOMONEY")
-						AddItems("SickSim0","Bandage",1,INVENTORY_STD)
+						AddItems("Hospital","Bandage",1,INVENTORY_STD)
 					end
 				else
 					--not enough mats
@@ -168,7 +169,7 @@ function Run()
 						Cured = true
 					else
 						MsgSay("","@L_MEDICUS_TREATMENT_DOC_NOMONEY")
-						AddItems("SickSim0","Medicine",1,INVENTORY_STD)
+						AddItems("Hospital","Medicine",1,INVENTORY_STD)
 					end
 				else
 					--not enough mats
@@ -194,7 +195,7 @@ function Run()
 						Cured = true
 					else
 						MsgSay("","@L_MEDICUS_TREATMENT_DOC_NOMONEY")
-						AddItems("SickSim0","Medicine",1,INVENTORY_STD)
+						AddItems("Hospital","Medicine",1,INVENTORY_STD)
 					end
 				else
 					--not enough mats
@@ -218,7 +219,7 @@ function Run()
 						Cured = true
 					else
 						MsgSay("","@L_MEDICUS_TREATMENT_DOC_NOMONEY")
-						AddItems("SickSim0","Medicine",1,INVENTORY_STD)
+						AddItems("Hospital","Medicine",1,INVENTORY_STD)
 					end
 				else
 					--not enough mats
@@ -242,7 +243,7 @@ function Run()
 						Cured = true
 					else
 						MsgSay("","@L_MEDICUS_TREATMENT_DOC_NOMONEY")
-						AddItems("SickSim0","PainKiller",1,INVENTORY_STD)
+						AddItems("Hospital","PainKiller",1,INVENTORY_STD)
 					end
 				else
 					--not enough mats
@@ -268,7 +269,7 @@ function Run()
 						Cured = true
 					else
 						MsgSay("","@L_MEDICUS_TREATMENT_DOC_NOMONEY")
-						AddItems("SickSim0","PainKiller",1,INVENTORY_STD)
+						AddItems("Hospital","PainKiller",1,INVENTORY_STD)
 					end
 				else
 					--not enough mats
@@ -294,7 +295,7 @@ function Run()
 						Cured = true
 					else
 						MsgSay("","@L_MEDICUS_TREATMENT_DOC_NOMONEY")
-						AddItems("SickSim0","PainKiller",1,INVENTORY_STD)
+						AddItems("Hospital","PainKiller",1,INVENTORY_STD)
 					end
 				else
 					--not enough mats
@@ -318,7 +319,7 @@ function Run()
 						Cured = true
 					else
 						MsgSay("","@L_MEDICUS_TREATMENT_DOC_NOMONEY")
-						AddItems("SickSim0","PainKiller",1,INVENTORY_STD)
+						AddItems("Hospital","PainKiller",1,INVENTORY_STD)
 					end
 				else
 					--not enough mats
@@ -342,7 +343,7 @@ function Run()
 						Cured = true
 					else
 						MsgSay("","@L_MEDICUS_TREATMENT_DOC_NOMONEY")
-						AddItems("SickSim0","Bandage",1,INVENTORY_STD)
+						AddItems("Hospital","Bandage",1,INVENTORY_STD)
 					end
 				else
 					--not enough mats
@@ -356,6 +357,11 @@ function Run()
 				end
 			else
 				MsgSay("","@L_MEDICUS_TREATMENT_DOC_NOTHING")
+				Cured = true
+				if DynastyIsAI("SickSim0") then
+					SimSetBehavior("SickSim0","idle")
+				end
+				RemoveProperty("SickSim0","WaitingForTreatment")	
 			end
 
 
@@ -380,7 +386,10 @@ function BlockMe()
 	while GetData("Blocked")~=1 do
 		Sleep(0.8)
 	end
-	Sleep(3)
+	if HasProperty("","WaitingForTreatment") then
+		RemoveProperty("","WaitingForTreatment")
+	end
+	Sleep(1)
 	f_ExitCurrentBuilding("")
 	if DynastyIsAI("") then
 		SimSetBehavior("","idle")

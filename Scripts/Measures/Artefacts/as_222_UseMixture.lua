@@ -46,7 +46,7 @@ function Run()
 	time2 = PlayAnimationNoWait("Destination","cogitate")
 	--play animation and spawn particles
 	if RemoveItems("","Mixture",1)>0 then
-		CommitAction("poison","","","Destination")
+		CommitAction("poison","","Destination","Destination")
 		local Time
 		Time = PlayAnimationNoWait("","use_object_standing")
 		Sleep(1)
@@ -64,6 +64,7 @@ function Run()
 		StopAction("poison","")
 		
 		SetState("Destination",STATE_UNCONSCIOUS,true)
+		AddImpact("Destination","BadDay",1,12)
 		
 		CreateScriptcall("StartDisease",1,"Measures/Artefacts/as_222_UseMixture.lua","StartDisease","Owner","Destination")
 		
@@ -86,10 +87,11 @@ end
 
 function StartDisease()
 	--infect
-	if GetImpactValue("Destination","staffofaesculap")>0 then
-		--no affect
+	if GetImpactValue("Destination","staffofaesculap")>0 or GetImpactValue("Destination","soap")>0 then
+		--no effect
 	else
 		diseases_Blackdeath("Destination",true,true)
+		SetState("",STATE_SICK,true)
 	end
 end
 

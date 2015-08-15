@@ -12,11 +12,12 @@ function Run()
 	local MeasureID = GetCurrentMeasureID("")
 	local TimeOut = mdata_GetTimeOut(MeasureID)
 
+if RemoveItems("","HexerdokumentI",1) then	
+	
 	MeasureSetNotRestartable()
 	SetMeasureRepeat(TimeOut)	
 
 	GetPosition("", "ParticleSpawnPos")
-	RemoveItems("","HexerdokumentI",1)
 
 	PlayAnimation("","watch_for_guard")
 	PlaySound3D("","Locations/wear_clothes/wear_clothes+1.wav", 1.0)
@@ -51,8 +52,9 @@ function Run()
 		Evidence = 11
   end
   
-  AddEvidence("Owner","Destination","Owner",Evidence)
-
+	AddEvidence("Owner","Destination","Owner",Evidence)
+	chr_GainXP("Owner",GetData("BaseXP"))
+end
 	StopMeasure()
 	
 end

@@ -63,7 +63,7 @@ function Normal()
 		--StartMagicalEffect("MyPosition","particles/aimingpoint.nif",1,0.1,0,EffectRange)
 		count = Find("Owner", "__F((Object.GetObjectsByRadius(Sim) == "..EffectRange..") AND NOT(Object.HasSameReligion(Owner))","Sim", -1)
 		for i=0,count-1 do 
-			if GetSkillValue("",RHETORIC)>=GetSkillValue("Sim"..i,EMPATHY)) then
+			if GetSkillValue("",RHETORIC)>=GetSkillValue("Sim"..i,EMPATHY) then
 				SimSetReligion("Sim"..i,SimGetReligion("Owner"))
 				SendCommandNoWait("Sim"..i,"ConvertReligion")
 				Sleep(1)
@@ -121,7 +121,7 @@ function Cutscene()
 		GetPosition("", "MyPosition")
 		count = Find("Owner", "__F((Object.GetObjectsByRadius(Sim) == "..EffectRange..") AND (Object.HasSameReligion(Owner))","Sim", -1)
 		for i=0,count-1 do 
-			if GetSkillValue("",RHETORIC)>=GetSkillValue("Sim"..i,EMPATHY)) then
+			if GetSkillValue("",RHETORIC)>=GetSkillValue("Sim"..i,EMPATHY) then
 				SimSetReligion("Sim"..i,SimGetReligion("Owner"))
 				Sleep(0.5)
 			end			

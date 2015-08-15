@@ -1,7 +1,7 @@
 function Run()
 
 	if IsStateDriven() then
-		local ItemName = "pddv"
+		local ItemName = "Pddv"
 		if GetItemCount("", ItemName, INVENTORY_STD)==0 then
 			if not ai_BuyItem("", ItemName, 1, INVENTORY_STD) then
 				return
@@ -12,7 +12,7 @@ function Run()
 	local favormodify = 100
 	local MaxDistance = 1500
 	local ActionDistance = 130
-	local YearsToLive = (-3)
+	local YearsToLive = (-4)
 	local MeasureID = GetCurrentMeasureID("")
 	local TimeOut = mdata_GetTimeOut(MeasureID)
 
@@ -29,7 +29,7 @@ function Run()
 	GetPosition("Destination", "ParticleSpawnPos")
 	PlayAnimationNoWait("Destination","cogitate")
 	RemoveItems("","pddv",1)
-  CommitAction("poison","","","Destination")
+	CommitAction("poison","","Destination","Destination")
 	PlayAnimationNoWait("","use_object_standing")
 	Sleep(1)
 	PlaySound3D("","Locations/wear_clothes/wear_clothes+1.wav", 1.0)
@@ -54,6 +54,7 @@ function Run()
 
 	if (GetSkillValue("Owner",SHADOW_ARTS) > GetSkillValue("Destination",EMPATHY)) then	
 		AddImpact("Destination","LifeExpanding",YearsToLive,-1)
+		AddImpact("Destination","BadDay",1,16)
 		
 		MsgNewsNoWait("","Destination","","intrigue",-1,
 				"@L_HPFZ_ARTEFAKT_PDDV_NUTZER_KOPF_+0",
@@ -65,7 +66,7 @@ function Run()
 		Sleep(1)	
 	end
 	chr_ModifyFavor("Destination","",-favormodify)
-
+	chr_GainXP("",GetData("BaseXP"))
 	StopMeasure()
 end
 

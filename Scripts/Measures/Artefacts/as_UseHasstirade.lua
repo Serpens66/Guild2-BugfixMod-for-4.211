@@ -34,6 +34,8 @@ function Run()
 		StopMeasure()
 	end
 	
+	if RemoveItems("","Hasstirade",1) then
+	
 	AlignTo("Owner", "Believer")
 	AlignTo("Believer", "Owner")
 	Sleep(1)
@@ -75,8 +77,9 @@ function Run()
 
 	MeasureSetNotRestartable()
 	SetMeasureRepeat(TimeOut)
-	RemoveItems("","Hasstirade",1)
-	chr_ModifyFavor("Believer","Destination",-100)		
+	chr_ModifyFavor("Believer","Destination",-100)
+	chr_GainXP("",GetData("BaseXP"))
+	AddImpact("Destination","BadDay",1,12)
 		
 		MsgNewsNoWait("","Believer","","intrigue",-1,
 				"@L_HPFZ_ARTEFAKT_TIRADE_NUTZER_KOPF_+0",
@@ -89,6 +92,7 @@ function Run()
 				"@L_HPFZ_ARTEFAKT_TIRADE_OPFERB_RUMPF_+0",GetID(""),GetID("Destination"))	
 		
 	StopMeasure()
+	end
 end
 
 function CleanUp()

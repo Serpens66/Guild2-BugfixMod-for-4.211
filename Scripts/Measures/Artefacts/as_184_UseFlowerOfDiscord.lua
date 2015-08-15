@@ -74,13 +74,13 @@ function Normal()
 	time1 = math.max(time1, time2)
 	Sleep(time1)
 	if RemoveItems("","FlowerOfDiscord",1)>0 then
-		CommitAction("poison", "", "", "Destination")
+		CommitAction("poison", "", "Destination", "Destination")
 		GetPosition("Believer", "ParticleSpawnPos")
 		StartSingleShotParticle("particles/flowerofdiscord.nif", "ParticleSpawnPos",2.7,5)
 		PlaySound3D("Believer","Locations/destillery/destillery+0.wav", 1.0)
 		
 		--modify the favor
-		local DestinationFavorModify = ((FavorPercent/100)*GetFavorToSim("Destination","Believer"))
+	--	local DestinationFavorModify = ((FavorPercent/100)*GetFavorToSim("Destination","Believer"))
 		local BelieverFavorModify = ((FavorPercent/100)*GetFavorToSim("Believer","Destination"))
 		
 		chr_ModifyFavor("Believer","Destination",-BelieverFavorModify)
@@ -130,17 +130,17 @@ function Cutscene()
 	
 	
 	if RemoveItems("","FlowerOfDiscord",1)>0 then
-		CommitAction("poison","","","Destination")
+		CommitAction("poison","","Destination","Destination")
 		if GetPositionOfSubobject("Believer", "Game_Head", "ParticleSpawnPos") then
 			StartSingleShotParticle("particles/flowerofdiscord_sit.nif", "ParticleSpawnPos",2.7,5)
 		end
 		PlaySound3D("Believer","Locations/destillery/destillery+0.wav", 1.0)
 		
 		--modify the favor
-		local DestinationFavorModify = ((FavorPercent/100)*GetFavorToSim("Destination","Believer"))
+	--	local DestinationFavorModify = ((FavorPercent/100)*GetFavorToSim("Destination","Believer"))
 		local BelieverFavorModify = ((FavorPercent/100)*GetFavorToSim("Believer","Destination"))
 		chr_ModifyFavor("Believer","Destination",-BelieverFavorModify)
-		chr_ModifyFavor("Destination","Believer",-DestinationFavorModify)
+	--	chr_ModifyFavor("Destination","Believer",-DestinationFavorModify)
 		
 		if SimGetCutscene("","cutscene") then
 			CutsceneCallUnscheduled("cutscene", "UpdatePanel")

@@ -50,7 +50,7 @@ function Run()
 
 	-- Commit the action
 	BuildingGetOwner("Destination", "Victim")
-	CommitAction("big_evil_thing", "Owner", "Owner", "Victim", "Destination")
+	CommitAction("lay_bomb", "Owner", "Victim", "Destination")
 
 	--throw the toadexcrements
 
@@ -70,7 +70,7 @@ function Run()
 		PlaySound3D("Destination","measures/toadexcrements+0.wav", 1.0)
 		
 	
-		StopAction("big_evil_thing", "")
+		StopAction("lay_bomb", "")
 	
 		Sleep(1.0)
 	
@@ -112,7 +112,7 @@ end
 -- -----------------------
 function CleanUp()
 
-	StopAction("big_evil_thing", "Owner")
+	StopAction("lay_bomb", "Owner")
 
 end
 

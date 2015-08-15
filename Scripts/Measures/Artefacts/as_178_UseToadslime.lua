@@ -44,7 +44,7 @@ function Run()
 	-- Commit the action
 	BuildingGetOwner("Destination", "Victim")
 	if RemoveItems("","Toadslime",1)>0 then
-		CommitAction("lay_bomb", "Owner", "Owner", "Victim", "Destination")
+		CommitAction("lay_bomb", "Owner", "Victim", "Destination")
 		
 		PlayAnimation("","manipulate_middle_twohand")
 		

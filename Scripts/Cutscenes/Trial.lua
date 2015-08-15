@@ -316,7 +316,7 @@ function EverybodySitDown()
 
 		-- check if assessor1 is present
 		GetInsideRoom("assessor1","Room")
-		if (GetID("assessor1")==-1) or (GetID("Room")~=GetID("judgeroom")) then  
+		if (GetID("assessor1")==-1) or (GetHP("assessor1")<1) or (GetID("Room")~=GetID("judgeroom")) then  
 			if AliasExists("assessor1") and GetID("assessor1")>0 then
 				CityAddPenalty("settlement","assessor1",PENALTY_MONEY,200)
 				feedback_MessagePolitics("assessor1","@L_LAWSUIT_3_INTRO_PERSON_NOT_PRESENT_RICHTER_MESSAGES_+0",
@@ -325,9 +325,9 @@ function EverybodySitDown()
 			BuildingFindSimByProperty("courtbuilding","BUILDING_NPC", 2,"assessor1")
 		end
 
-		-- check if assessor1 is present
+		-- check if assessor2 is present
 		GetInsideRoom("assessor2","Room")
-		if (GetID("assessor2")==-1) or (GetID("Room")~=GetID("judgeroom")) then
+		if (GetID("assessor2")==-1) or (GetHP("assessor2")<1) or  (GetID("Room")~=GetID("judgeroom")) then
 			if AliasExists("assessor2") and GetID("assessor2")>0 then
 				CityAddPenalty("settlement","assessor2",PENALTY_MONEY,200)
 				feedback_MessagePolitics("assessor2","@L_LAWSUIT_3_INTRO_PERSON_NOT_PRESENT_RICHTER_MESSAGES_+0",
@@ -1072,7 +1072,7 @@ function Go()
 		if GetImpactValue("accuser","AimForInquisitionalProceeding")~=0 then
 			trial_ModifyTotalEvidenceValue(3)
 			PlayAnimationNoWait("judge", "sit_talk")
-			MsgSay("judge","@L_PRIVILEGES_113_AIMFORINQUISITIONALPROCEEDING_LAWSUIT_JUDGE",GetID("accused"))
+			MsgSay("judge","@L_PRIVILEGES_113_AIMFORINQUISITIONALPROCEEDING_LAWSUIT_JUDGE",GetID("accuser"))
 		end
 
 

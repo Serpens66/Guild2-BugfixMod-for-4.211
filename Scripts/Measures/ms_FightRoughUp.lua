@@ -19,7 +19,7 @@ function Run()
 		feedback_OverheadActionName("Destination")
 		PlayAnimation("","watch_for_guard")
 		if GetImpactValue("Destination","REVOLT")==0 then
-			CommitAction("slugging","","","Destination")
+			CommitAction("slugging","","Destination","Destination")
 		end
 		GetPosition("Destination", "ParticleSpawnPos")
 		PlayAnimationNoWait("","rough_up")
@@ -42,7 +42,7 @@ function Run()
 			MsgNewsNoWait("Destination","","","intrigue",-1,
 							"@L_BATTLE_FIGHTROUGHUP_MSG_SUCCESS_VICTIM_HEAD_+0",
 							"@L_BATTLE_FIGHTROUGHUP_MSG_SUCCESS_VICTIM_BODY_+0",GetID("Destination"),GetID(""))
-			StopAction("slugging", "Owner")
+			StopAction("slugging", "")
 		end
 	end
 	RemoveProperty("Destination","RoughUp_start")

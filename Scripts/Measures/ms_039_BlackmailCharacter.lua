@@ -47,7 +47,7 @@ function Run()
 		StopMeasure()
 	end	
 
-	CommitAction("blackmail","Owner","Owner","Destination")
+	CommitAction("blackmail","Owner","Destination","Destination")
 	
 	-- Discuss the conditions
 	PlayAnimationNoWait("", "talk")

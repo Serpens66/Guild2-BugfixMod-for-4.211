@@ -53,7 +53,7 @@ function Run()
 	if not SendCommandNoWait("", "ChangeFlags") then
 		MsgQuick("", "@L_BATTLE_043_CAPTUREBUILDING_FAILURES_+2")
 	end
-	CommitAction("attackbuilding","","","OldBuildingOwner","InsideBuilding")
+	CommitAction("attackbuilding","","OldBuildingOwner","OldBuildingOwner")
 	CarryObject("", "Handheld_Device/ANIM_Flag.nif",false)
 	
 	LoopAnimation("", "capture_building",31)

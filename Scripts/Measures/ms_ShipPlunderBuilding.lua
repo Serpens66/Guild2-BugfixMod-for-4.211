@@ -50,7 +50,7 @@ function Run()
 	end
 	PlaySound3DVariation("Destination","measures/plunderbuilding",1)
 	PlaySound3DVariation("","Locations/alarm_horn_single",1)
-	CommitAction("burgleahouse","","", "Destination","Destination")
+	CommitAction("burgleahouse","", "Destination","Destination")
 	local EndTime = GetGametime() + duration
 	SetData("Time",duration)
 	SetData("EndTime",EndTime)

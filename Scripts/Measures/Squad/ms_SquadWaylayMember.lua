@@ -269,8 +269,7 @@ function Attack()
 	SetData("Tarnung",0)
 	SetState("", STATE_HIDDEN, false)
 
-	CommitAction("attackcart", "", "", "Victim")
-	StopAction("attackcart", "")
+	CommitAction("attackcart", "", "Victim")
 	
 	SetProperty("Squad","PrimaryTarget",GetID("Victim"))
 	
@@ -320,7 +319,8 @@ function Plunder()
 	end
 	
 	SetProperty("","DontLeave", 1)
-	CommitAction("plunder", "", "", "Victim")
+	StopAction("attackcart", "")
+	CommitAction("plunder", "", "Victim")
 	Sleep(2)
 	
 	if IsType("Victim","Sim") then
@@ -358,8 +358,8 @@ function Scan(Member)
 	
 	local Count
 	local BootyFilterSim = "__F((Object.GetObjectsByRadius(Sim) == "..BootyRadius..")AND NOT(Object.BelongsToMe())AND(Object.ActionAdmissible()))"
-	local BootyFilterCart = "__F((Object.GetObjectsByRadius(Cart) == "..BootyRadius..")AND NOT(Object.BelongsToMe())AND(Object.ActionAdmissible()))"
-	
+	local BootyFilterCart = "__F((Object.GetObjectsByRadius(Cart) == "..BootyRadius..")AND NOT(Object.BelongsToMe())AND NOT(Object.HasImpact(Invisible))AND(Object.ActionAdmissible()))"
+
 	-- waylay on sims deactivated
 	local NumVictimSims = 0 -- Find("Destination",BootyFilterSim,"VictimSim", -1)
 	local NumVictimCarts = Find("Destination",BootyFilterCart,"VictimCart", -1)

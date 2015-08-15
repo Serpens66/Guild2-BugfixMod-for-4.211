@@ -45,7 +45,7 @@ function Run()
 	
 	PlaySound3DVariation("","Locations/alarm_horn_single",1)
 	PlayAnimation("","attack_them")
-	CommitAction("burgleahouse","","", "Destination","Destination")
+	CommitAction("burgleahouse","","Destination", "Destination")
 	DynastySetDiplomacyState("Destination","",DIP_FOE)
 	if BuildingGetType("Destination") == GL_BUILDING_TYPE_FARM or BuildingGetType("Destination") == GL_BUILDING_TYPE_RANGERHUT or BuildingGetType("Destination") == GL_BUILDING_TYPE_MINE or BuildingGetType("Destination") == GL_BUILDING_TYPE_ROBBER then
 		if not f_MoveTo("","DoorPos",GL_MOVESPEED_RUN) then
@@ -67,7 +67,7 @@ function Run()
 				local TimeLeft = ImpactGetMaxTimeleft("Destination","BoobyTrap")
 				AddImpact("Destination","buildingburgledtoday",1,TimeLeft)
 			end
-			CommitAction("explosion", "", "", "Destination", "Destination")
+			CommitAction("explosion", "", "Destination", "Destination")
 			StopMeasure()
 		end
 		if GetLocatorByName("Destination","bomb1","ParticleSpawnPos") then

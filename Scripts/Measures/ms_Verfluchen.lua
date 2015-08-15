@@ -20,7 +20,7 @@ function Run()
     Sleep(1)
     RemoveItems("","Schadelkerze",6)
     MeasureSetNotRestartable()
-    CommitAction("poison","Owner", "Owner", "Victim","Destination")
+    CommitAction("poison","", "Destination", "Destination")
 
     GetPosition("","FluchPos")
     GfxAttachObject("skull1", "Locations/Alchimist/Skull.nif")

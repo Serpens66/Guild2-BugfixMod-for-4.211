@@ -117,6 +117,7 @@ function Attack()
 
 
 	SetData("DontLeave", 1)
+	CommitAction("SLUGGING","","Victim")
 	if not MeasureRun("","Victim","AttackEnemy",true) then
 		return false
 	end
@@ -168,6 +169,7 @@ function Hijack()
 	CarryObject("","Handheld_Device/ANIM_Largesack.nif", false)
 	
 	--hide the victim
+	CommitAction("hijack","","Victim")
 	SetState("Victim",STATE_DUEL,true)
 	AddImpact("Victim", "Hidden", 1 , -1)
 	SetInvisible("Victim", true) 

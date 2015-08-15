@@ -16,7 +16,7 @@ function Run()
 	feedback_OverheadActionName("Destination")
 	PlayAnimation("","watch_for_guard")
 	if GetImpactValue("Destination","REVOLT")==0 then
-		CommitAction("rob", "", "", "Destination")
+		CommitAction("rob", "", "Destination", "Destination")
 	end
 	PlayAnimation("","manipulate_bottom_r")
 	local Booty = Plunder("", "Destination",1)
@@ -32,7 +32,7 @@ function Run()
 		chr_GainXP("",GetData("BaseXP"))
 	else
 		local Level = SimGetLevel("Destination")
-		local MoneyToSteal = Level*(Rand(100)+10)
+		local MoneyToSteal = Level*50+Level*(Rand(100))
 		CreditMoney("",MoneyToSteal,"IncomeRobber")
 		chr_GainXP("",GetData("BaseXP"))
 		mission_ScoreCrime("",MoneyToSteal)
@@ -40,7 +40,7 @@ function Run()
 	end
 	Sleep(2)
 	
-	StopAction("rob", "Owner")
+	StopAction("rob", "")
 end
 
 function GetOSHData(MeasureID)

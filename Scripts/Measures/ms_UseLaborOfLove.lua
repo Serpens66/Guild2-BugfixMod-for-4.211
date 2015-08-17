@@ -79,7 +79,7 @@ function Run()
 		    SpendMoney("",spend,"LaborOfLove")
 	    end
 	    CreditMoney("Destination",spend,"LaborOfLove")
-			IncrementXPQuiet("",15)
+			IncrementXPQuiet("Destination",15)
 		end
 	end
 

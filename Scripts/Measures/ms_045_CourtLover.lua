@@ -75,6 +75,16 @@ function Run()
 		end
 	end
 	
+    if HasProperty("Destination","NoMarry") then    
+        if GetProperty("Destination","NoMarryTime") < GetGametime() then -- if time is over, remove property
+            RemoveProperty("Destination","NoMarryTime")
+            RemoveProperty("Destination","NoMarry")
+        elseif GetDynastyID("") == GetProperty("Destination","NoMarry") then -- if our dynasty recently fired the destination Sim, stop measure.
+            MsgQuick("","@L_COURTLOVER_MSG_FAILED_QUICK")
+            StopMeasure()
+            return
+        end
+    end
 	
 	-- Calculate the difficulty which will be set as property to the destination and used in the following MsgBox
 	-- There are four locations where this property will be removed:

@@ -15,18 +15,23 @@ function Run()
 	    ms_049_fireemployee_FireLeibwache()
 	end
 	
-	IncrementXP("",-10000)
-	SetSkillValue("",1,1)
-	SetSkillValue("",2,1)
-	SetSkillValue("",3,1)
-	SetSkillValue("",4,1)
-	SetSkillValue("",5,1)
-	SetSkillValue("",6,1)
-	SetSkillValue("",7,1)
-	SetSkillValue("",8,1)
-	SetSkillValue("",9,1)
-	SetSkillValue("",10,1)
-	
+	-- IncrementXP("",-10000)   -- does not work , it does not reduce the level. The aim was to prevent firing and marrying a 6 level sim. (there is no way to reduce a level except to replace a sim)
+	-- SetSkillValue("",1,1)
+	-- SetSkillValue("",2,1)
+	-- SetSkillValue("",3,1)
+	-- SetSkillValue("",4,1)
+	-- SetSkillValue("",5,1)
+	-- SetSkillValue("",6,1)
+	-- SetSkillValue("",7,1)
+	-- SetSkillValue("",8,1)
+	-- SetSkillValue("",9,1)
+	-- SetSkillValue("",10,1)
+    
+    -- instead of lowering the values, we simply introduce a blockade. A fired sim can't be married for 5 turns from the dynasty who fired him
+	local DynID = GetDynastyID("workbuilding")
+    SetProperty("","NoMarry",DynID)
+    SetProperty("","NoMarryTime",GetGametime()+120)
+    
 	Fire("")
 	SimResetBehavior("")
 end

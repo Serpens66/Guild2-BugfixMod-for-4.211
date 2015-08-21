@@ -9,8 +9,8 @@ function Run()
 		Button2 = ""
 	end
 	
-	local Worker3Exists = FindWorker("","worker",5)
-	if Worker3Exists ~= "" then
+	local Worker3Exists = FindWorker("","worker",5)   -- the level is the minimum level.
+	if Worker3Exists ~= "" then                      
 		Button3 = ""
 	end		
 
@@ -153,8 +153,9 @@ function DecideYou()
 
 	Error = SimHire("RandWorker", "",true)
 	chr_OutputHireError("RandWorker", "", Error)
-
-    IncrementXPQuiet("RandWorker",xp)	      -- XP back to previous value
+    if SimGetLevel("RandWorker") == 1 then  -- sometimes the level is not reduced to 1 (I guess because he already had the right clothes)
+        IncrementXPQuiet("RandWorker",xp)	      -- XP back to previous value
+    end
 	if Error == "" then
 		PlaySound("Effects/moneybag_to_hand+0.wav",1)
 		if BuildingHasUpgrade("",716) == true then
@@ -189,8 +190,9 @@ function DecideYou()
 		diseases_Blackdeath("RandWorker",false)
 		diseases_Fracture("RandWorker",false)
 		diseases_Caries("RandWorker",false)
+        SetState("RandWorker",STATE_SICK,false)
 	end
-	SetState("RandWorker",STATE_SICK,false)
+	
 	
 	MoveSetActivity("","")
 	SimGetWorkingPlace("RandWorker", "workbuilding")

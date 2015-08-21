@@ -20,7 +20,6 @@ function Run() -- fixed by Serp, after hiring, the sim won't loose his level.
 	local Level		= SimGetLevel("")
 	local Salary	= SimGetWage("")
     local XP        = GetDatabaseValue("CharLevels", Level-1, "xp")  -- XP which was needed for the current level
-    local Name      = GetName("")
 
 	local result = MsgNews("Destination","","@P"..
 					"@B[O,@LJa_+0]"..
@@ -53,14 +52,14 @@ function Run() -- fixed by Serp, after hiring, the sim won't loose his level.
 		diseases_Blackdeath("",false)
 		diseases_Fracture("",false)
 		diseases_Caries("",false)
+        SetState("",STATE_SICK,false)
 	end
-    SetState("",STATE_SICK,false)
+    
 
 	MoveSetActivity("","")
 	chr_CalculateBuildingBonus("","Destination","hire")
     
-    local params = ""..Name..","..XP  --  put the parameters in a string  (an array does not work -.-) , and seperate them in the GiveXPBack function
-    CreateScriptcall( "GiveBack", 0.005, "Measures/ms_048_HireEmployee.lua", "GiveXPBack", "", -1, params) -- use scriptcall, because this function is stopped after SimHire
+    CreateScriptcall( "GiveBack", 0.001, "Measures/ms_048_HireEmployee.lua", "GiveXPBack", "", "Destination", XP) -- use scriptcall, because this function is stopped after SimHire
     
     local	Error = SimHire("", "Destination",true) -- I think after hiring, the sim is replaced with another sim with same name and so on, but level 1.
     -- and the script measure is stopped about some miliseconds after SimHire, because the calling object gets removed!!! So with luck, you can call one function after it (the sound), but not more.
@@ -94,13 +93,8 @@ function CheckLeibwache()
 		ForbidMeasure("", "ToggleInventory", EN_BOTH)
 end
 
--- is called via the following in the HireEmployee script, because after SimHire the script is stopped, but we need to add back the XP.
--- local params = ""..Name..","..XP  --  put the parameters in a string  (an array does not work -.-) , and seperate them in the GiveXPBack function
--- CreateScriptcall( "GiveBack", 0.005, "Library/helpfuncs.lua", "GiveXPBack", "", -1, params)
-function GiveXPBack(argstring)
-    local args = helpfuncs_mysplit(argstring,",") -- uses the helpfuncs script in libary, created by Serp (which also needs an entry in stdafx.lua)
-    local Name = args[1]
-    local XP = args[2]
-    ScenarioGetObjectByName("cl_Sim",Name,"Sim")
-    IncrementXPQuiet("Sim",XP) -- after hiring, the sim looses all his XP, so we give it back
+function GiveXPBack(params)
+    if SimGetLevel("") == 1 then  -- sometimes the level is not reduced to 1 (I guess because he already had the right clothes)
+        IncrementXPQuiet("",params) -- after hiring, the sim looses all his XP, so we give it back
+    end
 end

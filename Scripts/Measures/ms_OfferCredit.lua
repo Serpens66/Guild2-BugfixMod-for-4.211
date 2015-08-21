@@ -14,7 +14,7 @@ function Run()
 		StopMeasure()
 	end
 	
-	local TimeOut  = GetData("TimeOut")
+	local TimeOut  = GetData("TimeOut")  -- this is default
 	local MakeBreak = false
 
 	GetLocatorByName("BankBuilding","Work3","ChiefPos")
@@ -22,7 +22,13 @@ function Run()
 	SetProperty("BankBuilding", "OfferCreditNow", 1)
 	SetProperty("BankBuilding", "OfferChr", GetID(""))
 	SetProperty("BankBuilding", "OfferStartTime", GetGametime())
-
+    
+    -- fix by Serp, continue offer credit the next working day.  I'm not 100% sure, that this is correct, but it seems to work.
+    SetData("IsProductionMeasure", 0)
+	SimSetProduceItemID("", -GetCurrentMeasureID(""), -1)
+	SetData("IsProductionMeasure", 1)
+    ---
+    
 	if TimeOut ~= nil then
 		TimeOut = GetGametime() + TimeOut
 		MakeBreak = true

@@ -525,4 +525,7 @@ Data:
 1566   "CanLevelUpCity"   "__F((Object.CanBeControlled())AND(Object.HasImpact(LevelUpCity))AND(Object.IsInOfficeBuilding()))"   |
 1567   "CanArrangeConcert"   "__F((Object.Type==Building)AND(Object.BelongsToMe())AND(Object.IsType(4))OR(Object.IsType(36)))"   |
 1568   "CanUseMineGuards"   "__F((Object.CanBeControlled())AND(Object.GetOwnedBuildings())AND(Object.IsType(12))AND NOT Object.GetState(building))"   |
+
+1569   "CanChangeSettings"   "__F((Object.CanBeControlled())AND(Object.GetInsideBuilding())AND(Object.BelongsToMe())AND(Object.IsType(2))AND NOT(Object.HasProperty(ChangeSettingsBlock)))"   |
+
 2000   "PATCH_TODO"   "__F((Object.BelongsToMe())AND(Object.IsDynastySim()))"   |

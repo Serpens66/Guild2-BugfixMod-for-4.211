@@ -1,5 +1,16 @@
 function Run()
 	GetScenario("World")
+    
+    if IsMultiplayerGame() then -- prevent OoS because of different settings for sessions
+        GetLocalPlayerDynasty("localdyn")
+        local TotalTime = GetGametime()
+        if TotalTime > 5.5 and TotalTime < 6.5 then  -- at 6 am (the game starts at 6)
+            MsgBoxNoWait("localdyn","localdyn",          -- send a message to everyone to choose game settings
+                        "@L_BUGFIX_TURNSESSIONS_HEAD",
+                        "@L_BUGFIX_TURNSESSIONS_BODY")
+        end
+    end
+    
 	if not HasProperty("World", "static") then
 
 		local Level = CityGetLevel("")

@@ -116,7 +116,7 @@ function Run()
 		Sleep(5)
 	end
 	
-	StopMeasure()
+	--StopMeasure()
 end
 
 function CleanUp()

@@ -4,10 +4,11 @@ function Run()
     if IsMultiplayerGame() then -- prevent OoS because of different settings for sessions
         GetLocalPlayerDynasty("localdyn")
         local TotalTime = GetGametime()
-        if TotalTime > 5.5 and TotalTime < 6.5 then  -- at 6 am (the game starts at 6)
+        if TotalTime > 5.5 and TotalTime < 9.5 and not HasProperty("World", "done") then  -- at 6 am (the game starts at 6... but in MP at 8)
             MsgBoxNoWait("localdyn","localdyn",          -- send a message to everyone to choose game settings
                         "@L_BUGFIX_TURNSESSIONS_HEAD",
                         "@L_BUGFIX_TURNSESSIONS_BODY")
+            SetProperty("World", "done",1)
         end
     end
     

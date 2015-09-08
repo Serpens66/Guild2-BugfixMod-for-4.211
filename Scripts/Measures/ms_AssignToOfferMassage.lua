@@ -27,6 +27,9 @@ function Run()
 	SetProperty("","CocotteProvidesLove",1)
 	
 	-- start the labor
+	SetData("IsProductionMeasure", 0)
+	SimSetProduceItemID("", -GetCurrentMeasureID(""), -1)
+	SetData("IsProductionMeasure", 1)
 	while 1 do
 	
 		if BuildingGetAISetting("WorkBuilding", "Produce_Selection")>0 then

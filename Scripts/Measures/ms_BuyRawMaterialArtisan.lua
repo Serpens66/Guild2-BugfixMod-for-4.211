@@ -98,9 +98,7 @@ function Run()
 
 	--check the item
 	local ItemIndex
-	if Result == "A0" then
-		ItemIndex = 0
-	elseif Result == "A1" then
+	if Result == "A1" then
 		ItemIndex = 1
 	elseif Result == "A2" then
 		ItemIndex = 2
@@ -108,8 +106,10 @@ function Run()
 		ItemIndex = 3
 	elseif Result == "A4" then
 		ItemIndex = 4
-	else
+	elseif Result == "A5" then
 		ItemIndex = 5
+	else
+		ItemIndex = 6
 	end
 
 	local Object = ItemGetName(items[ItemIndex]).."Box"..box

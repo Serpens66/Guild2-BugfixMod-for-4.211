@@ -60,10 +60,11 @@ if RemoveItems("","HexerdokumentII",1) then
 	    Evidence = 18
     end
 		AddEvidence("Owner","Destination","Owner",Evidence)
-		AddImpact("Destination","BadDay",1,12)
   end
-
-  end
+  
+	AddImpact("Destination","BadDay",1,12)
+	chr_GainXP("Owner",GetData("BaseXP"))
+end
 	StopMeasure()
 	
 end
